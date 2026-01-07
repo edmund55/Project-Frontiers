@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Rendering;
 
 [RequireComponent(typeof(Rigidbody))]
 public class Player : MonoBehaviour
@@ -8,6 +9,7 @@ public class Player : MonoBehaviour
     public float jumpForce = 8f;
     public float fallMultiplier = 2f;
     public float riseMultiplier = 2f;
+    public float forwardSpeed = 15f;
 
     [Header("Ground Check")]
     public Transform groundCheck;
@@ -40,6 +42,7 @@ public class Player : MonoBehaviour
 
         Vector3 velocity = rb.linearVelocity;
         velocity.x = xInput * moveSpeed;
+        velocity.z = forwardSpeed;
         rb.linearVelocity = velocity;
     }
 
