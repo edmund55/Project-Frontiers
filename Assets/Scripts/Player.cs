@@ -18,6 +18,7 @@ public class Player : MonoBehaviour
 
     private Rigidbody rb;
     private bool isGrounded;
+    private bool canControl = true;
 
     void Awake()
     {
@@ -38,6 +39,8 @@ public class Player : MonoBehaviour
 
     void HandleMovement()
     {
+        if (!canControl) { return; }
+
         float xInput = Input.GetAxis("Horizontal");
 
         Vector3 velocity = rb.linearVelocity;
@@ -48,6 +51,8 @@ public class Player : MonoBehaviour
 
     void HandleJump()
     {
+        if (!canControl) { return; }
+
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
@@ -74,4 +79,14 @@ public class Player : MonoBehaviour
             groundLayer
         );
     }
+    public void DisableControl()
+    {
+        canControl = false;
+
+        Vector3 velocity = rb.linearVelocity;
+        velocity.x = 0f;
+        velocity.z = 0f;
+        rb.linearVelocity = velocity;
+    }
+
 }
