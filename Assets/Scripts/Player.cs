@@ -16,18 +16,38 @@ public class Player : MonoBehaviour
     public float groundCheckRadius = 0.2f;
     public LayerMask groundLayer;
 
+    [Header("Health")]
+    public int maxHealth = 3;
+
+    [Header("Invincibility")]
+    public float invincibilityDuration = 2f;
+
+    [Header("Visuals")]
+    private MeshRenderer playerRenderer; // player mesh; visual during invicibility
+
     private Rigidbody rb;
     private bool isGrounded;
     private bool canControl = true;
+    private int currentHealth;
+    private bool isDead;
+    private bool isInvincible = false;
+    private float invincibilityTimer;
 
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        playerRenderer = GetComponent<MeshRenderer>();
+    }
+
+    private void Start()
+    {
+        currentHealth = maxHealth;
     }
 
     void Update()
     {
         HandleJump();
+        UpdateInvincibility();
     }
 
     void FixedUpdate()
@@ -79,6 +99,61 @@ public class Player : MonoBehaviour
             groundLayer
         );
     }
+    void UpdateInvincibility()
+    {
+        if (!isInvincible) { return; }
+
+        invincibilityTimer -= Time.deltaTime;
+
+        // flicker effect during invicibility
+        if (playerRenderer != null)
+        {
+            playerRenderer.enabled = (Mathf.Repeat(Time.time * 5f, 1f) > 0.5f);
+        }
+
+        if (invincibilityTimer <= 0f)
+        {
+            isInvincible = false;
+            if (playerRenderer != null) playerRenderer.enabled = true;
+        }
+    }
+
+
+    public bool TakeDamage(int damage)
+    {
+        if (isDead || isInvincible)
+            return false;
+
+        currentHealth -= damage;
+
+        if (currentHealth <= 0)
+        {
+            Die();
+            return true;
+        }
+
+        ActivateInvincibility();
+        return false;
+    }
+
+    public void ActivateInvincibility()
+    {
+        isInvincible = true;
+        invincibilityTimer = invincibilityDuration;
+    }
+
+
+    public void Die()
+    {
+        if (isDead)
+            return;
+
+        isDead = true;
+
+        DisableControl();
+    }
+
+
     public void DisableControl()
     {
         canControl = false;
