@@ -1,9 +1,9 @@
 using UnityEngine;
 using TMPro;
 
-public class UI_Score : MonoBehaviour
+public class UIscore : MonoBehaviour
 {
-    public static UI_Score Instance;
+    public static UIscore Instance;
 
     [SerializeField] private TMP_Text scoreText;
 

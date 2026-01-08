@@ -20,7 +20,7 @@ public class ScoreManager : MonoBehaviour
     public void AddScore(int amount)
     {
         score += amount;
-        UI_Score.Instance.UpdateScore(score);
+        UIscore.Instance.UpdateScore(score);
     }
 
     public int GetScore()
