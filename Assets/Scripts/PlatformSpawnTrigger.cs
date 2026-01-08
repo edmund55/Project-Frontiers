@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-public class InfiniteGround : MonoBehaviour
+public class PlatformSpawnTrigger : MonoBehaviour
 {
     public List<GameObject> pathPrefabs;
     public float pathLength = 30f;
@@ -23,7 +23,7 @@ public class InfiniteGround : MonoBehaviour
         if (!other.CompareTag("Player")) return;
 
         SpawnNextPath();
-        Destroy(transform.parent.gameObject, 5f);
+    }
 
 
     void SpawnNextPath()
@@ -38,6 +38,6 @@ public class InfiniteGround : MonoBehaviour
             Quaternion.identity
         );
     }
-}
+
 }
 
