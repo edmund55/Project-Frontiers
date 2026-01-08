@@ -5,11 +5,15 @@ using UnityEngine.Rendering;
 public class Player : MonoBehaviour
 {
     [Header("Movement")]
-    public float moveSpeed = 8f;
     public float jumpForce = 8f;
     public float fallMultiplier = 2f;
     public float riseMultiplier = 2f;
     public float forwardSpeed = 15f;
+
+    [Header("Lane Movement")]
+    public int laneCount = 3;
+    public float laneWidth = 3.33f; //platform width divided by number of lanes
+    public float laneChangeSpeed = 10f;
 
     [Header("Ground Check")]
     public Transform groundCheck;
@@ -32,6 +36,7 @@ public class Player : MonoBehaviour
     private bool isDead;
     private bool isInvincible = false;
     private float invincibilityTimer;
+    private int currentLane = 1; // Start in center lane (0: left, 1: center, 2: right)
 
     void Awake()
     {
@@ -46,6 +51,7 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+        HandleLaneInput();
         HandleJump();
         UpdateInvincibility();
     }
@@ -57,17 +63,56 @@ public class Player : MonoBehaviour
         CheckGround();
     }
 
+    void HandleLaneInput()
+    {
+        if (!canControl) return;
+
+        if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
+            ChangeLane(-1);
+
+        if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
+            ChangeLane(1);
+    }
+
+    void ChangeLane(int direction)
+    {
+        currentLane += direction;
+        currentLane = Mathf.Clamp(currentLane, 0, laneCount - 1);
+    }
+
     void HandleMovement()
     {
         if (!canControl) { return; }
 
-        float xInput = Input.GetAxis("Horizontal");
+        float targetX = GetLaneXPosition(currentLane);
 
-        Vector3 velocity = rb.linearVelocity;
-        velocity.x = xInput * moveSpeed;
-        velocity.z = forwardSpeed;
-        rb.linearVelocity = velocity;
+        Vector3 position = rb.position;
+        position.x = Mathf.Lerp(position.x, targetX, laneChangeSpeed * Time.fixedDeltaTime);
+        position.z += forwardSpeed * Time.fixedDeltaTime;
+
+        rb.MovePosition(position);
     }
+
+    float GetLaneXPosition(int laneIndex)
+    {
+        float halfWidth = (laneCount - 1) * laneWidth * 0.5f;
+        return (laneIndex * laneWidth) - halfWidth;
+    }
+
+    void OnDrawGizmos()
+{
+    Gizmos.color = Color.yellow;
+
+    for (int i = 0; i < laneCount; i++)
+    {
+        float x = GetLaneXPosition(i);
+        Gizmos.DrawLine(
+            new Vector3(x, 0, transform.position.z - 20),
+            new Vector3(x, 0, transform.position.z + 20)
+        );
+    }
+}
+
 
     void HandleJump()
     {
