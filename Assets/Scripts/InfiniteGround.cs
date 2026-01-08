@@ -23,7 +23,7 @@ public class InfiniteGround : MonoBehaviour
         if (!other.CompareTag("Player")) return;
 
         SpawnNextPath();
-        Destroy(transform.parent.gameObject, 5f);
+        Destroy(transform.parent.gameObject, 7f);
 
 
     void SpawnNextPath()
