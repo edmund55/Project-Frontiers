@@ -128,3 +128,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Collectable
   scoreValue: 1
+  scorePerSpeedIncrease: 20
+  speedIncrease: 5
+  maxSpeed: 30
