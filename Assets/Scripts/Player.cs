@@ -1,24 +1,15 @@
 using UnityEngine;
 using UnityEngine.Rendering;
 
-[RequireComponent(typeof(Rigidbody))]
 public class Player : MonoBehaviour
 {
     [Header("Movement")]
-    public float jumpForce = 8f;
-    public float fallMultiplier = 2f;
-    public float riseMultiplier = 2f;
     public float forwardSpeed = 15f;
 
     [Header("Lane Movement")]
     public int laneCount = 3;
     public float laneWidth = 3.33f; //platform width divided by number of lanes
     public float laneChangeSpeed = 10f;
-
-    [Header("Ground Check")]
-    public Transform groundCheck;
-    public float groundCheckRadius = 0.2f;
-    public LayerMask groundLayer;
 
     [Header("Health")]
     public int maxHealth = 3;
@@ -27,10 +18,8 @@ public class Player : MonoBehaviour
     public float invincibilityDuration = 2f;
 
     [Header("Visuals")]
-    private MeshRenderer playerRenderer; // player mesh; visual during invicibility
+    private MeshRenderer[] playerRenderers; // player mesh; visual during invicibility
 
-    private Rigidbody rb;
-    private bool isGrounded;
     private bool canControl = true;
     private int currentHealth;
     private bool isDead;
@@ -40,8 +29,7 @@ public class Player : MonoBehaviour
 
     void Awake()
     {
-        rb = GetComponent<Rigidbody>();
-        playerRenderer = GetComponent<MeshRenderer>();
+        playerRenderers = GetComponentsInChildren<MeshRenderer>();
     }
 
     private void Start()
@@ -51,18 +39,18 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+        HandleForwardMovement();
         HandleLaneInput();
-        HandleJump();
+        HandleLaneMovement();
         UpdateInvincibility();
     }
 
-    void FixedUpdate()
+    void HandleForwardMovement()
     {
-        HandleMovement();
-        BetterJump();
-        CheckGround();
-    }
+        if (!canControl) { return; }
 
+        transform.Translate(Vector3.forward * forwardSpeed * Time.deltaTime, Space.World);
+    }
     void HandleLaneInput()
     {
         if (!canControl) return;
@@ -73,77 +61,26 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
             ChangeLane(1);
     }
-
     void ChangeLane(int direction)
     {
         currentLane += direction;
         currentLane = Mathf.Clamp(currentLane, 0, laneCount - 1);
     }
-
-    void HandleMovement()
+    void HandleLaneMovement()
     {
-        if (!canControl) { return; }
-
         float targetX = GetLaneXPosition(currentLane);
 
-        Vector3 position = rb.position;
-        position.x = Mathf.Lerp(position.x, targetX, laneChangeSpeed * Time.fixedDeltaTime);
-        position.z += forwardSpeed * Time.fixedDeltaTime;
+        Vector3 position = transform.position;
+        position.x = Mathf.Lerp(position.x, targetX, laneChangeSpeed * Time.deltaTime);
 
-        rb.MovePosition(position);
+        transform.position = position;
     }
-
     float GetLaneXPosition(int laneIndex)
     {
         float halfWidth = (laneCount - 1) * laneWidth * 0.5f;
         return (laneIndex * laneWidth) - halfWidth;
     }
 
-    void OnDrawGizmos()
-{
-    Gizmos.color = Color.yellow;
-
-    for (int i = 0; i < laneCount; i++)
-    {
-        float x = GetLaneXPosition(i);
-        Gizmos.DrawLine(
-            new Vector3(x, 0, transform.position.z - 20),
-            new Vector3(x, 0, transform.position.z + 20)
-        );
-    }
-}
-
-
-    void HandleJump()
-    {
-        if (!canControl) { return; }
-
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
-        {
-            rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-        }
-    }
-
-    void BetterJump()
-    {
-        if (rb.linearVelocity.y < 0)
-        {
-            rb.linearVelocity += Vector3.up * Physics.gravity.y * (fallMultiplier - 1) * Time.fixedDeltaTime;
-        }
-        else if (rb.linearVelocity.y > 0)
-        {
-            rb.linearVelocity += Vector3.up * Physics.gravity.y * (riseMultiplier - 1) * Time.fixedDeltaTime;
-        }
-    }
-
-    void CheckGround()
-    {
-        isGrounded = Physics.CheckSphere(
-            groundCheck.position,
-            groundCheckRadius,
-            groundLayer
-        );
-    }
     void UpdateInvincibility()
     {
         if (!isInvincible) { return; }
@@ -151,15 +88,24 @@ public class Player : MonoBehaviour
         invincibilityTimer -= Time.deltaTime;
 
         // flicker effect during invicibility
-        if (playerRenderer != null)
+        if (playerRenderers != null)
         {
-            playerRenderer.enabled = (Mathf.Repeat(Time.time * 5f, 1f) > 0.5f);
+            bool isVisible = (Mathf.Repeat(Time.time * 5f, 1f) > 0.5f);
+            SetRenderersEnabled(isVisible);
         }
 
-        if (invincibilityTimer <= 0f)
+        if (invincibilityTimer <= 0f && isInvincible)
         {
             isInvincible = false;
-            if (playerRenderer != null) playerRenderer.enabled = true;
+            SetRenderersEnabled(true);
+        }
+    }
+
+    void SetRenderersEnabled(bool state)
+    {
+        foreach (MeshRenderer renderer in playerRenderers)
+        {
+            if (renderer != null) renderer.enabled = state;
         }
     }
 
@@ -203,10 +149,21 @@ public class Player : MonoBehaviour
     {
         canControl = false;
 
-        Vector3 velocity = rb.linearVelocity;
-        velocity.x = 0f;
-        velocity.z = 0f;
-        rb.linearVelocity = velocity;
+        transform.Translate(Vector3.zero);
+    }
+
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.yellow;
+
+        for (int i = 0; i < laneCount; i++)
+        {
+            float x = GetLaneXPosition(i);
+            Gizmos.DrawLine(
+                new Vector3(x, 0, transform.position.z - 20),
+                new Vector3(x, 0, transform.position.z + 20)
+            );
+        }
     }
 
 }

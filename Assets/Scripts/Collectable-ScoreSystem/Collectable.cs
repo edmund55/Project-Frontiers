@@ -26,7 +26,7 @@ public class Collectable : MonoBehaviour
 
         if (levelsGained > 0)
         {
-            Player player = other.GetComponent<Player>();
+            Player player = other.GetComponentInParent<Player>();
             if (player != null)
             {
                 player.forwardSpeed = Mathf.Min(player.forwardSpeed + speedIncrease * levelsGained, maxSpeed);
