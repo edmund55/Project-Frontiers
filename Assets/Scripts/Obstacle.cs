@@ -2,11 +2,11 @@ using UnityEngine;
 
 public class Obstacle : MonoBehaviour
 {
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if(collision.collider.CompareTag("Player"))
+        if (other.CompareTag("Player"))
         {
-            Player player = collision.collider.GetComponent<Player>();
+            Player player = other.GetComponentInParent<Player>();
 
             if (player != null)
             {
@@ -15,7 +15,8 @@ public class Obstacle : MonoBehaviour
                 if (playerKilled)
                 {
                     player.DisableControl();
-                } else
+                }
+                else
                 {
                     Destroy(gameObject);
                 }
