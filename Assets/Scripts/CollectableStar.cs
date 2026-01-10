@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Collectable : MonoBehaviour
+public class CollectableStar : MonoBehaviour
 {
     [Header("Score Value")]
     [SerializeField] private int scoreValue = 1;
@@ -12,12 +12,14 @@ public class Collectable : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!other.CompareTag("Player")) return;
-        int previousScore = ScoreManager.Instance.GetScore(); // Get score before adding
+        Player player = other.GetComponentInParent<Player>();
+        if (player == null) return;
 
-        ScoreManager.Instance.AddScore(scoreValue);
+        int previousScore = UIManager.Instance.GetScore(); // Get score before adding
 
-        int currentScore = ScoreManager.Instance.GetScore(); // Get score after adding
+        UIManager.Instance.AddScore(scoreValue);
+
+        int currentScore = UIManager.Instance.GetScore(); // Get score after adding
 
         // calculate speed increases based on score thresholds
         int previousLevel = previousScore / scoreThreshold;
@@ -26,13 +28,9 @@ public class Collectable : MonoBehaviour
 
         if (levelsGained > 0)
         {
-            Player player = other.GetComponentInParent<Player>();
-            if (player != null)
-            {
-                player.forwardSpeed = Mathf.Min(player.forwardSpeed + speedIncrease * levelsGained, maxSpeed);
-            }
+            player.forwardSpeed = Mathf.Min(player.forwardSpeed + (levelsGained * speedIncrease), maxSpeed);
         }
 
-        gameObject.SetActive(false);
+        Destroy(gameObject);
     }
 }

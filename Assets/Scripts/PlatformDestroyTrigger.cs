@@ -4,8 +4,8 @@ public class PlatformDestroyTrigger : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
-        if (!other.CompareTag("Player"))
-            return;
+        Player player = other.GetComponentInParent<Player>();
+        if (player == null) return;
 
         Destroy(transform.parent.gameObject, 2f);
     }

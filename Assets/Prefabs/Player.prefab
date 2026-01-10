@@ -50,9 +50,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Player
   forwardSpeed: 15
   laneCount: 3
-  laneWidth: 3.33
+  laneWidth: 4
   laneChangeSpeed: 10
+  verticalSpeed: 6
+  minHeight: 1.5
+  maxHeight: 5.5
   maxHealth: 3
+  healthBar: {fileID: 0}
+  maxBattery: 100
+  batteryDecreasePerSecond: 5
+  batteryBar: {fileID: 0}
   invincibilityDuration: 2
 --- !u!54 &4121114501725861979
 Rigidbody:
@@ -232,7 +239,7 @@ GameObject:
   - component: {fileID: 6809977762906156915}
   m_Layer: 0
   m_Name: Cylinder
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -345,7 +352,7 @@ GameObject:
   - component: {fileID: 4986305626770663854}
   m_Layer: 0
   m_Name: Capsule
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

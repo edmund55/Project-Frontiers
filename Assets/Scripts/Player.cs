@@ -1,19 +1,26 @@
 using UnityEngine;
-using UnityEngine.Rendering;
-using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
-    [Header("Movement")]
+    [Header("Forward Movement")]
     public float forwardSpeed = 15f;
 
     [Header("Lane Movement")]
     public int laneCount = 3;
-    public float laneWidth = 3.33f; //platform width divided by number of lanes
+    public float laneWidth = 4f; // platform width divided by number of lanes
     public float laneChangeSpeed = 10f;
+
+    [Header("Vertical Movement")]
+    public float verticalSpeed = 6f;
+    public float minHeight = 1.5f;
+    public float maxHeight = 5.5f; 
 
     [Header("Health")]
     public int maxHealth = 3;
+
+    [Header("Battery System")]
+    public float maxBattery = 100f;
+    public float batteryDecreasePerSecond = 5f;
 
     [Header("Invincibility")]
     public float invincibilityDuration = 2f;
@@ -21,17 +28,10 @@ public class Player : MonoBehaviour
     [Header("Visuals")]
     private MeshRenderer[] playerRenderers; // player mesh; visual during invicibility
 
-    [Header("Battery System")]
-    public float maxBattery = 100f;
-    public float batteryDecreasePerSecond = 10f;
-    public Slider batteryBar;
+    private int currentHealth;
     private float currentBattery;
 
-
     private bool canControl = true;
-    private int currentHealth;
-    public Slider healthBar;
-    private bool isDead;
     private bool isInvincible = false;
     private float invincibilityTimer;
     private int currentLane = 1; // Start in center lane (0: left, 1: center, 2: right)
@@ -45,39 +45,29 @@ public class Player : MonoBehaviour
     {
         currentHealth = maxHealth;
         currentBattery = maxBattery;
-
-        if (healthBar != null)
-        {
-            healthBar.minValue = 0;
-            healthBar.maxValue = maxHealth;
-            healthBar.value = currentHealth;
-        }
-
-        if (batteryBar != null)
-        {
-            batteryBar.minValue = 0;
-            batteryBar.maxValue = maxBattery;
-            batteryBar.value = currentBattery;
-        }
     }
 
     void Update()
     {
-        if (isDead) return;
+        if (!canControl) return;
 
         HandleForwardMovement();
+        HandleVerticalMovement();
         HandleLaneInput();
         HandleLaneMovement();
         UpdateInvincibility();
         HandleBattery();
     }
 
+    // Forward Movement
     void HandleForwardMovement()
     {
         if (!canControl) { return; }
 
         transform.Translate(Vector3.forward * forwardSpeed * Time.deltaTime, Space.World);
     }
+
+    // Lane Movement
     void HandleLaneInput()
     {
         if (!canControl) return;
@@ -108,35 +98,64 @@ public class Player : MonoBehaviour
         return (laneIndex * laneWidth) - halfWidth;
     }
 
+    // Vertical Movement
+    void HandleVerticalMovement()
+    {
+        float yInput = 0f;
+        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
+            yInput = 1f;
+
+        if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
+            yInput = -1f;
+
+        if (yInput == 0f) return;
+
+        Vector3 position = transform.position;
+        position.y += yInput * verticalSpeed * Time.deltaTime;
+        position.y = Mathf.Clamp(position.y, minHeight, maxHeight);
+
+        transform.position = position;
+    }
+
+    // Health System
+    public bool TakeDamage(int damage)
+    {
+        if (!canControl || isInvincible)
+            return false;
+
+        currentHealth -= damage;
+        UIManager.Instance.SetHealth(currentHealth);
+
+        if (currentHealth <= 0)
+        {
+            DisableControl();
+            return true;
+        }
+
+        ActivateInvincibility();
+        return false;
+    }
+
+    // Battery System
     void HandleBattery()
     {
         currentBattery -= batteryDecreasePerSecond * Time.deltaTime;
         currentBattery = Mathf.Clamp(currentBattery, 0, maxBattery);
 
-        UpdateBatteryUI();
+        UIManager.Instance.SetBattery(currentBattery);
 
         if (currentBattery <= 0)
         {
-            Die();
+            DisableControl();
         }
     }
-
     public void RechargeBattery(float amount)
     {
-        if (isDead) return;
-        
         currentBattery = Mathf.Clamp(currentBattery + amount, 0, maxBattery);
-        UpdateBatteryUI();
+        UIManager.Instance.SetBattery(currentBattery);
     }
 
-    void UpdateBatteryUI()
-    {
-        if (batteryBar != null)
-        {
-            batteryBar.value = currentBattery;
-        }
-    }
-
+    // Invincibility
     void UpdateInvincibility()
     {
         if (!isInvincible) { return; }
@@ -156,7 +175,13 @@ public class Player : MonoBehaviour
             SetRenderersEnabled(true);
         }
     }
+    public void ActivateInvincibility()
+    {
+        isInvincible = true;
+        invincibilityTimer = invincibilityDuration;
+    }
 
+    // Visuals
     void SetRenderersEnabled(bool state)
     {
         foreach (MeshRenderer renderer in playerRenderers)
@@ -165,70 +190,12 @@ public class Player : MonoBehaviour
         }
     }
 
-
-    public bool TakeDamage(int damage)
-    {
-        if (isDead || isInvincible)
-            return false;
-
-        currentHealth -= damage;
-        UpdateHealthUI();
-
-        if (currentHealth <= 0)
-        {
-            Die();
-            return true;
-        }
-
-        ActivateInvincibility();
-        return false;
-    }
-
-    void UpdateHealthUI()
-    {
-        if (healthBar != null)
-        {
-            healthBar.value = currentHealth;
-        }
-    }
-
-    public void ActivateInvincibility()
-    {
-        isInvincible = true;
-        invincibilityTimer = invincibilityDuration;
-    }
-
-
-    public void Die()
-    {
-        if (isDead)
-            return;
-
-        isDead = true;
-
-        DisableControl();
-    }
-
-
+    // 
     public void DisableControl()
     {
         canControl = false;
 
         transform.Translate(Vector3.zero);
-    }
-
-    void OnDrawGizmos()
-    {
-        Gizmos.color = Color.yellow;
-
-        for (int i = 0; i < laneCount; i++)
-        {
-            float x = GetLaneXPosition(i);
-            Gizmos.DrawLine(
-                new Vector3(x, 0, transform.position.z - 20),
-                new Vector3(x, 0, transform.position.z + 20)
-            );
-        }
     }
 
 }
