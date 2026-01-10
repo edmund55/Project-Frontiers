@@ -4,10 +4,11 @@ using System.Collections.Generic;
 public class PlatformSpawnTrigger : MonoBehaviour
 {
     public List<GameObject> pathPrefabs;
-    public float pathLength = 30f;
+    public float pathLength = 60f;
 
     private static Vector3 nextSpawnPosition;
     private static bool initialized = false;
+    private bool triggered = false;
 
     private void Start()
     {
@@ -20,7 +21,12 @@ public class PlatformSpawnTrigger : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!other.CompareTag("Player")) return;
+        if (triggered) return;
+
+        Player player = other.GetComponentInParent<Player>();
+        if (player == null) return;
+
+        triggered = true;
 
         SpawnNextPath();
     }
