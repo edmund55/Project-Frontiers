@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Rendering;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
@@ -20,8 +21,16 @@ public class Player : MonoBehaviour
     [Header("Visuals")]
     private MeshRenderer[] playerRenderers; // player mesh; visual during invicibility
 
+    [Header("Battery System")]
+    public float maxBattery = 100f;
+    public float batteryDecreasePerSecond = 10f;
+    public Slider batteryBar;
+    private float currentBattery;
+
+
     private bool canControl = true;
     private int currentHealth;
+    public Slider healthBar;
     private bool isDead;
     private bool isInvincible = false;
     private float invincibilityTimer;
@@ -35,14 +44,32 @@ public class Player : MonoBehaviour
     private void Start()
     {
         currentHealth = maxHealth;
+        currentBattery = maxBattery;
+
+        if (healthBar != null)
+        {
+            healthBar.minValue = 0;
+            healthBar.maxValue = maxHealth;
+            healthBar.value = currentHealth;
+        }
+
+        if (batteryBar != null)
+        {
+            batteryBar.minValue = 0;
+            batteryBar.maxValue = maxBattery;
+            batteryBar.value = currentBattery;
+        }
     }
 
     void Update()
     {
+        if (isDead) return;
+
         HandleForwardMovement();
         HandleLaneInput();
         HandleLaneMovement();
         UpdateInvincibility();
+        HandleBattery();
     }
 
     void HandleForwardMovement()
@@ -81,6 +108,35 @@ public class Player : MonoBehaviour
         return (laneIndex * laneWidth) - halfWidth;
     }
 
+    void HandleBattery()
+    {
+        currentBattery -= batteryDecreasePerSecond * Time.deltaTime;
+        currentBattery = Mathf.Clamp(currentBattery, 0, maxBattery);
+
+        UpdateBatteryUI();
+
+        if (currentBattery <= 0)
+        {
+            Die();
+        }
+    }
+
+    public void RechargeBattery(float amount)
+    {
+        if (isDead) return;
+        
+        currentBattery = Mathf.Clamp(currentBattery + amount, 0, maxBattery);
+        UpdateBatteryUI();
+    }
+
+    void UpdateBatteryUI()
+    {
+        if (batteryBar != null)
+        {
+            batteryBar.value = currentBattery;
+        }
+    }
+
     void UpdateInvincibility()
     {
         if (!isInvincible) { return; }
@@ -116,6 +172,7 @@ public class Player : MonoBehaviour
             return false;
 
         currentHealth -= damage;
+        UpdateHealthUI();
 
         if (currentHealth <= 0)
         {
@@ -125,6 +182,14 @@ public class Player : MonoBehaviour
 
         ActivateInvincibility();
         return false;
+    }
+
+    void UpdateHealthUI()
+    {
+        if (healthBar != null)
+        {
+            healthBar.value = currentHealth;
+        }
     }
 
     public void ActivateInvincibility()
