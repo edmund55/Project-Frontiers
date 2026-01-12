@@ -10,10 +10,26 @@ public class CollectableStar : MonoBehaviour
     [SerializeField] private float speedIncrease = 5f;
     [SerializeField] private float maxSpeed = 30f;
 
+    private FlexibleSoundPlayer soundPlayer;
+
+    private void Awake()
+    {
+        soundPlayer = GetComponent<FlexibleSoundPlayer>();
+        if (soundPlayer == null)
+        {
+            Debug.LogWarning("FlexibleSoundPlayer component is missing on CollectableStar.");
+        }
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         Player player = other.GetComponentInParent<Player>();
         if (player == null) return;
+
+        if (soundPlayer != null)
+        {
+            soundPlayer.Play();
+        }
 
         int previousScore = UIManager.Instance.GetScore(); // Get score before adding
 
