@@ -17,6 +17,7 @@ public class Player : MonoBehaviour
 
     [Header("Health")]
     public int maxHealth = 3;
+    public AudioClip damageClip;
 
     [Header("Battery System")]
     public float maxBattery = 100f;
@@ -25,19 +26,28 @@ public class Player : MonoBehaviour
     [Header("Invincibility")]
     public float invincibilityDuration = 2f;
 
+    [Header("Shooting")]
+    public GameObject bulletPrefab;
+    public Transform firePoint;
+    public float fireCooldown = 0.3f;
+    public AudioClip shootClip;
+
     [Header("Visuals")]
     private MeshRenderer[] playerRenderers; // player mesh; visual during invicibility
 
     private int currentHealth;
     private float currentBattery;
 
+    private int currentLane = 1; // Start in center lane (0: left, 1: center, 2: right)
     private bool canControl = true;
     private bool isInvincible = false;
     private float invincibilityTimer;
-    private int currentLane = 1; // Start in center lane (0: left, 1: center, 2: right)
+    private float fireTimer;
+    private AudioSource audioSource;
 
     void Awake()
     {
+        audioSource = GetComponent<AudioSource>();
         playerRenderers = GetComponentsInChildren<MeshRenderer>();
     }
 
@@ -55,8 +65,9 @@ public class Player : MonoBehaviour
         HandleVerticalMovement();
         HandleLaneInput();
         HandleLaneMovement();
-        UpdateInvincibility();
         HandleBattery();
+        UpdateInvincibility();
+        HandleShooting();
     }
 
     // Forward Movement
@@ -123,6 +134,9 @@ public class Player : MonoBehaviour
         if (!canControl || isInvincible)
             return false;
 
+        if (damageClip != null)
+            audioSource.PlayOneShot(damageClip);
+
         currentHealth -= damage;
         UIManager.Instance.SetHealth(currentHealth);
 
@@ -180,6 +194,27 @@ public class Player : MonoBehaviour
         isInvincible = true;
         invincibilityTimer = invincibilityDuration;
     }
+
+    // Shooting
+    void HandleShooting()
+    {
+        fireTimer -= Time.deltaTime;
+
+        if (Input.GetKeyDown(KeyCode.Space) && fireTimer <= 0f)
+        {
+            Shoot();
+            fireTimer = fireCooldown;
+        }
+    }
+    void Shoot()
+    {
+        GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+        bullet.GetComponent<Bullet>().owner = BulletOwner.Player;
+
+        if (shootClip != null)
+            audioSource.PlayOneShot(shootClip);
+    }
+
 
     // Visuals
     void SetRenderersEnabled(bool state)
