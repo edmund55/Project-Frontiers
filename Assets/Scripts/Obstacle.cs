@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class Obstacle : MonoBehaviour
 {
+    public AudioClip bulletCrashSound;
+
     private void OnTriggerEnter(Collider other)
     {
         Player player = other.GetComponentInParent<Player>();
@@ -17,5 +19,10 @@ public class Obstacle : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    public void PlayBulletCrashSound()
+    {
+        AudioSource.PlayClipAtPoint(bulletCrashSound, transform.position);
     }
 }

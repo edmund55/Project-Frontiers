@@ -3,22 +3,7 @@ using System.Collections.Generic;
 
 public class PlatformSpawnTrigger : MonoBehaviour
 {
-    public List<GameObject> pathPrefabs;
-    public float pathLength = 60f;
-
-    private static Vector3 nextSpawnPosition;
-    private static bool initialized = false;
-    private bool triggered = false;
-
-    private void Start()
-    {
-        if (!initialized)
-        {
-            nextSpawnPosition = transform.parent.position;
-            initialized = true;
-        }
-    }
-
+    private bool triggered = false; // avoid spawning twice, since player have two collider rn
     private void OnTriggerEnter(Collider other)
     {
         if (triggered) return;
@@ -26,24 +11,9 @@ public class PlatformSpawnTrigger : MonoBehaviour
         Player player = other.GetComponentInParent<Player>();
         if (player == null) return;
 
+        FindFirstObjectByType<PlatformSpawner>().SpawnNextPath();
+
         triggered = true;
-
-        SpawnNextPath();
     }
-
-
-    void SpawnNextPath()
-    {
-        int index = Random.Range(0, pathPrefabs.Count);
-
-        nextSpawnPosition += Vector3.forward * pathLength;
-
-        Instantiate(
-            pathPrefabs[index],
-            nextSpawnPosition,
-            Quaternion.identity
-        );
-    }
-
 }
 

@@ -15,10 +15,6 @@ public class CollectableStar : MonoBehaviour
     private void Awake()
     {
         soundPlayer = GetComponent<FlexibleSoundPlayer>();
-        if (soundPlayer == null)
-        {
-            Debug.LogWarning("FlexibleSoundPlayer component is missing on CollectableStar.");
-        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -26,10 +22,7 @@ public class CollectableStar : MonoBehaviour
         Player player = other.GetComponentInParent<Player>();
         if (player == null) return;
 
-        if (soundPlayer != null)
-        {
-            soundPlayer.Play();
-        }
+        soundPlayer.Play();
 
         int previousScore = UIManager.Instance.GetScore(); // Get score before adding
 
