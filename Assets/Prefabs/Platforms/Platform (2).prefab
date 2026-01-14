@@ -125,6 +125,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2b537f61661a4a48ba0222688b002e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InfiniteGround
+  spawnChance: 0.75
+  powerupPrefabs:
+  - {fileID: 7228252555717508352, guid: 8fdea615f8080be439075cf20d6732ee, type: 3}
+  - {fileID: 553202216920079083, guid: aa24850d1a9e88a49a3c316f9b8f3b8b, type: 3}
+  - {fileID: 7681058192766551689, guid: 96f1617f215d78a4c8cab922e534bcae, type: 3}
+  powerupZ: -0.48
+  laneXPositions:
+  - -0.33
+  - 0
+  - 0.33
 --- !u!1 &5175244630378485184
 GameObject:
   m_ObjectHideFlags: 0
@@ -1449,7 +1459,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 991628852942336457, guid: 7c502c7d5cab53f4d8ab67d40ead52f1, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.035
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 991628852942336457, guid: 7c502c7d5cab53f4d8ab67d40ead52f1, type: 3}
       propertyPath: m_LocalPosition.y
