@@ -34,11 +34,11 @@ Transform:
   m_Children:
   - {fileID: 4602092366502843869}
   - {fileID: 3771410104971843598}
-  - {fileID: 2633486913240891890}
   - {fileID: 7326342186630890213}
-  - {fileID: 6681078281901499019}
-  - {fileID: 4758789483754205358}
+  - {fileID: 2633486913240891890}
   - {fileID: 1057660052016373984}
+  - {fileID: 4758789483754205358}
+  - {fileID: 6681078281901499019}
   - {fileID: 2342597567337675704}
   - {fileID: 5074419184002522927}
   - {fileID: 136560425626332276}
@@ -134,7 +134,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2342597567337675704}
   m_Layer: 6
-  m_Name: coins1
+  m_Name: Star-1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -420,7 +420,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5074419184002522927}
   m_Layer: 6
-  m_Name: coins1 (1)
+  m_Name: Star-2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -504,7 +504,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2996535582672433877, guid: 051eb3752f6c21247869c4bd062e2704, type: 3}
       propertyPath: m_Name
-      value: Obstacle (3)
+      value: Obstacle (1)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -784,7 +784,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2996535582672433877, guid: 051eb3752f6c21247869c4bd062e2704, type: 3}
       propertyPath: m_Name
-      value: Obstacle (8)
+      value: Obstacle (2)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -806,7 +806,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1955030512521436795, guid: d4674f6e15bb82b4ba44f5a10ad2a8a4, type: 3}
       propertyPath: m_Name
-      value: CollectableBattery (2)
+      value: CollectableBattery (1)
       objectReference: {fileID: 0}
     - target: {fileID: 6814353537717150133, guid: d4674f6e15bb82b4ba44f5a10ad2a8a4, type: 3}
       propertyPath: m_LocalScale.x
@@ -1064,7 +1064,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2996535582672433877, guid: 051eb3752f6c21247869c4bd062e2704, type: 3}
       propertyPath: m_Name
-      value: Obstacle (7)
+      value: Obstacle
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1226,7 +1226,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1955030512521436795, guid: d4674f6e15bb82b4ba44f5a10ad2a8a4, type: 3}
       propertyPath: m_Name
-      value: CollectableBattery (1)
+      value: CollectableBattery
       objectReference: {fileID: 0}
     - target: {fileID: 6814353537717150133, guid: d4674f6e15bb82b4ba44f5a10ad2a8a4, type: 3}
       propertyPath: m_LocalScale.x
@@ -1344,7 +1344,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2996535582672433877, guid: 051eb3752f6c21247869c4bd062e2704, type: 3}
       propertyPath: m_Name
-      value: Obstacle (9)
+      value: Obstacle (3)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1694,7 +1694,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2996535582672433877, guid: 051eb3752f6c21247869c4bd062e2704, type: 3}
       propertyPath: m_Name
-      value: Obstacle (6)
+      value: Obstacle (4)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -35,14 +35,14 @@ Transform:
   - {fileID: 4228150278609872374}
   - {fileID: 3833023972134057034}
   - {fileID: 8184344202760241933}
-  - {fileID: 3607171934344964371}
-  - {fileID: 249367652300623860}
   - {fileID: 6862217457260359900}
+  - {fileID: 249367652300623860}
+  - {fileID: 3607171934344964371}
   - {fileID: 3641962818037549787}
   - {fileID: 8206991653845687739}
   - {fileID: 455324168740541529}
-  - {fileID: 4422725553125509092}
   - {fileID: 7316374936661427607}
+  - {fileID: 4422725553125509092}
   - {fileID: 4035066310935999061}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -259,7 +259,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8206991653845687739}
   m_Layer: 6
-  m_Name: coins2
+  m_Name: Star-2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -295,7 +295,7 @@ GameObject:
   m_Component:
   - component: {fileID: 455324168740541529}
   m_Layer: 6
-  m_Name: coins1
+  m_Name: Star-1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -644,7 +644,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2996535582672433877, guid: 051eb3752f6c21247869c4bd062e2704, type: 3}
       propertyPath: m_Name
-      value: Obstacle (6)
+      value: Obstacle (4)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -664,6 +664,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6243480003519956513}
     m_Modifications:
+    - target: {fileID: 2941883994393932166, guid: 8d7e448d9dae74d32b4a3f9b6e1bdc22, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2941883994393932166, guid: 8d7e448d9dae74d32b4a3f9b6e1bdc22, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.016666668
+      objectReference: {fileID: 0}
     - target: {fileID: 2941883994393932166, guid: 8d7e448d9dae74d32b4a3f9b6e1bdc22, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -706,7 +714,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4103453416377517487, guid: 8d7e448d9dae74d32b4a3f9b6e1bdc22, type: 3}
       propertyPath: m_Name
-      value: Laser (1)
+      value: Laser
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -776,7 +784,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2996535582672433877, guid: 051eb3752f6c21247869c4bd062e2704, type: 3}
       propertyPath: m_Name
-      value: Obstacle (5)
+      value: Obstacle (2)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -938,7 +946,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1955030512521436795, guid: d4674f6e15bb82b4ba44f5a10ad2a8a4, type: 3}
       propertyPath: m_Name
-      value: CollectableBattery (2)
+      value: CollectableBattery
       objectReference: {fileID: 0}
     - target: {fileID: 6814353537717150133, guid: d4674f6e15bb82b4ba44f5a10ad2a8a4, type: 3}
       propertyPath: m_LocalScale.x
@@ -1686,7 +1694,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2996535582672433877, guid: 051eb3752f6c21247869c4bd062e2704, type: 3}
       propertyPath: m_Name
-      value: Obstacle (7)
+      value: Obstacle (1)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
