@@ -125,4 +125,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1c95d2ba46b73a449a6d6cd95b2ada5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Obstacle
-  bulletCrashSound: {fileID: 0}
+  bulletCrashSound: {fileID: 8300000, guid: 9d18a25eb485e1a4d83e91024691ec09, type: 3}
