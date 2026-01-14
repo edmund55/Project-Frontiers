@@ -18,6 +18,7 @@ public class Player : MonoBehaviour
     [Header("Health")]
     public int maxHealth = 3;
     public AudioClip damageClip;
+    private bool shieldActive;
 
     [Header("Battery System")]
     public float maxBattery = 100f;
@@ -131,7 +132,7 @@ public class Player : MonoBehaviour
     // Health System
     public bool TakeDamage(int damage)
     {
-        if (!canControl || isInvincible)
+        if (!canControl || isInvincible || shieldActive)
             return false;
 
         if (damageClip != null)
@@ -149,6 +150,17 @@ public class Player : MonoBehaviour
         ActivateInvincibility();
         return false;
     }
+    public void AddHealth(int amount)
+    {
+        currentHealth = Mathf.Clamp(currentHealth + amount, 0, maxHealth);
+        UIManager.Instance.SetHealth(currentHealth);
+    }
+
+    public void SetShield(bool state)
+    {
+        shieldActive = state;
+    }
+
 
     // Battery System
     void HandleBattery()

@@ -18,7 +18,7 @@ public class MainMenu : MonoBehaviour
     // Back to Main Menu from How To Play
     public void BackToMainMenu()
     {
-        SceneManager.LoadScene("MainMenuScene");
+        SceneManager.LoadScene("MenuScene");
     }
 
     // Quit

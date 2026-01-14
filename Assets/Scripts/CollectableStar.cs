@@ -26,7 +26,8 @@ public class CollectableStar : MonoBehaviour
 
         int previousScore = UIManager.Instance.GetScore(); // Get score before adding
 
-        UIManager.Instance.AddScore(scoreValue);
+        int modifiedScore = PowerUpManager.Instance.ModifyScore(scoreValue);
+        UIManager.Instance.AddScore(modifiedScore);
 
         int currentScore = UIManager.Instance.GetScore(); // Get score after adding
 
