@@ -154,3 +154,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: defb48c5d4d8286428dfcbc53b45729c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CollectableLightning
+  audioClip: {fileID: 8300000, guid: 45023ba8d13c55c43b8d98e6ef3aef0d, type: 3}

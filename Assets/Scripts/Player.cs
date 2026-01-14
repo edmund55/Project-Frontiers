@@ -18,6 +18,7 @@ public class Player : MonoBehaviour
     [Header("Health")]
     public int maxHealth = 3;
     public AudioClip damageClip;
+    public AudioClip deathClip;
     private bool shieldActive;
 
     [Header("Battery System")]
@@ -243,6 +244,7 @@ public class Player : MonoBehaviour
         canControl = false;
 
         transform.Translate(Vector3.zero);
+        audioSource.PlayOneShot(deathClip);
     }
 
 }

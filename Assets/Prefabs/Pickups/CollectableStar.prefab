@@ -74,7 +74,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6370375967782769560, guid: fd0c3cf208684aa449f9ddb3aeb72651, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.054
+      value: -0.24
       objectReference: {fileID: 0}
     - target: {fileID: 6370375967782769560, guid: fd0c3cf208684aa449f9ddb3aeb72651, type: 3}
       propertyPath: m_LocalPosition.y
@@ -280,8 +280,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CollectableSoundPlayer
   clips:
-  - {fileID: 8300000, guid: 531da31eef91441b9ba7f9f6935a9a57, type: 3}
-  - {fileID: 8300000, guid: cba659570dbc6439cbbc84130802712f, type: 3}
+  - {fileID: 8300000, guid: 8613128421fad134d811df762521ce8e, type: 3}
+  - {fileID: 8300000, guid: 89a151a189acd48489e5525b1ec37ca3, type: 3}
+  - {fileID: 8300000, guid: 412f8543924ce2c47a1fae15afe443b1, type: 3}
+  - {fileID: 8300000, guid: 7431c87ef6c917a489c8374e600a0c8c, type: 3}
+  - {fileID: 8300000, guid: 08aa6261cefaf0048906ff9af82899c7, type: 3}
   playbackMode: 0
 --- !u!114 &3474636550722720673
 MonoBehaviour:
@@ -296,9 +299,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Collectable
   scoreValue: 1
-  scoreThreshold: 20
+  scoreThreshold: 30
   speedIncrease: 2
-  maxSpeed: 30
+  maxSpeed: 20
 --- !u!95 &349955687417258117
 Animator:
   serializedVersion: 7
