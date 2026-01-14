@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6370375967782769560}
   - component: {fileID: 3304905619065265362}
   m_Layer: 0
-  m_Name: Star (1)
+  m_Name: CollectableStarModel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
