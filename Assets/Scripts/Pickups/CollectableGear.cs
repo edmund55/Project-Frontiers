@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class CollectableGear : MonoBehaviour
 {
+    public AudioClip audioClip;
+
     [SerializeField] private int lifeAmount = 1;
 
     private bool triggered = false;
@@ -16,6 +18,7 @@ public class CollectableGear : MonoBehaviour
         triggered = true;
 
         PowerUpManager.Instance.GiveLife(player, lifeAmount);
+        AudioSource.PlayClipAtPoint(audioClip, transform.position);
         Destroy(gameObject);
     }
 }

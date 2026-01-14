@@ -13,11 +13,12 @@ public class PlatformSpawner : MonoBehaviour
         nextSpawnPosition = Vector3.zero;
     }
 
-    public void SpawnNextPath()
+    public GameObject SpawnNextPath()
     {
         int index = Random.Range(0, pathPrefabs.Count);
         nextSpawnPosition += Vector3.forward * pathLength;
 
-        Instantiate(pathPrefabs[index], nextSpawnPosition, Quaternion.identity);
+        GameObject newPlatform = Instantiate(pathPrefabs[index], nextSpawnPosition, Quaternion.identity);
+        return newPlatform;
     }
 }
