@@ -58,7 +58,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2285394494594058678, guid: 8b4b2ad4b123790419aa14e0f886fa30, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 0.75
       objectReference: {fileID: 0}
     - target: {fileID: 2285394494594058678, guid: 8b4b2ad4b123790419aa14e0f886fa30, type: 3}
       propertyPath: m_LocalPosition.y
@@ -151,6 +151,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c709a674ba744489b956476e38b01a2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CollectableBattery
+  audioClip: {fileID: 8300000, guid: 0346a4e5a5682a247affa8a115f359a4, type: 3}
   RechargeAmount: 30
 --- !u!4 &4509765866404876131 stripped
 Transform:

@@ -125,4 +125,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0a55d8f5a05a2f49b4c69e8374ea592, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CollectableGear
+  audioClip: {fileID: 8300000, guid: b5ccd9cf0c971fa4aa2a81b77cd4bdae, type: 3}
   lifeAmount: 1

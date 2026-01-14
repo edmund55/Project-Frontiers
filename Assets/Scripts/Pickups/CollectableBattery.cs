@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class CollectableBattery : MonoBehaviour
 {
+    public AudioClip audioClip;
+
     [SerializeField] private float RechargeAmount = 30f;
 
     private bool triggered = false;
@@ -16,7 +18,7 @@ public class CollectableBattery : MonoBehaviour
         triggered = true;
 
         player.RechargeBattery(RechargeAmount);
-
+        AudioSource.PlayClipAtPoint(audioClip, transform.position);
         Destroy(gameObject);
     }
 }
