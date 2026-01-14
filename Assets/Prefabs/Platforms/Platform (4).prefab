@@ -34,8 +34,8 @@ Transform:
   m_Children:
   - {fileID: 587309683437807283}
   - {fileID: 3712436904575429933}
-  - {fileID: 4871493638194681127}
   - {fileID: 8770397141826766433}
+  - {fileID: 4871493638194681127}
   - {fileID: 6006008661029853981}
   - {fileID: 8347690672793150595}
   - {fileID: 8771720396730151942}
@@ -132,7 +132,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8347690672793150595}
   m_Layer: 6
-  m_Name: coins2
+  m_Name: Star-2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -154,8 +154,8 @@ Transform:
   - {fileID: 4339684191780995476}
   - {fileID: 2279182619749243173}
   - {fileID: 4350187166778823133}
-  - {fileID: 787478079182032096}
   - {fileID: 5770493037658434099}
+  - {fileID: 787478079182032096}
   m_Father: {fileID: 742091592812544814}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4225429326340904775
@@ -418,7 +418,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8771720396730151942}
   m_Layer: 6
-  m_Name: coins1
+  m_Name: Star-1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -523,6 +523,14 @@ PrefabInstance:
     m_TransformParent: {fileID: 742091592812544814}
     m_Modifications:
     - target: {fileID: 2941883994393932166, guid: 8d7e448d9dae74d32b4a3f9b6e1bdc22, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2941883994393932166, guid: 8d7e448d9dae74d32b4a3f9b6e1bdc22, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.016666668
+      objectReference: {fileID: 0}
+    - target: {fileID: 2941883994393932166, guid: 8d7e448d9dae74d32b4a3f9b6e1bdc22, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -564,7 +572,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4103453416377517487, guid: 8d7e448d9dae74d32b4a3f9b6e1bdc22, type: 3}
       propertyPath: m_Name
-      value: Laser (1)
+      value: Laser
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -866,7 +874,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1955030512521436795, guid: d4674f6e15bb82b4ba44f5a10ad2a8a4, type: 3}
       propertyPath: m_Name
-      value: CollectableBattery (1)
+      value: CollectableBattery
       objectReference: {fileID: 0}
     - target: {fileID: 6814353537717150133, guid: d4674f6e15bb82b4ba44f5a10ad2a8a4, type: 3}
       propertyPath: m_LocalScale.x
@@ -1194,7 +1202,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2996535582672433877, guid: 051eb3752f6c21247869c4bd062e2704, type: 3}
       propertyPath: m_Name
-      value: Obstacle (7)
+      value: Obstacle
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1264,7 +1272,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2996535582672433877, guid: 051eb3752f6c21247869c4bd062e2704, type: 3}
       propertyPath: m_Name
-      value: Obstacle (3)
+      value: Obstacle (1)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1544,7 +1552,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2996535582672433877, guid: 051eb3752f6c21247869c4bd062e2704, type: 3}
       propertyPath: m_Name
-      value: Obstacle (6)
+      value: Obstacle (2)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
