@@ -1455,14 +1455,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 2565062947697541461, guid: 6eaa5f6c74060bb4ebd7aec3fda85acb, type: 3}
-      propertyPath: healthBar
-      value: 
-      objectReference: {fileID: 1046898788}
-    - target: {fileID: 2565062947697541461, guid: 6eaa5f6c74060bb4ebd7aec3fda85acb, type: 3}
-      propertyPath: batteryBar
-      value: 
-      objectReference: {fileID: 1612328911}
     - target: {fileID: 3086172945556173434, guid: 6eaa5f6c74060bb4ebd7aec3fda85acb, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1502,10 +1494,6 @@ PrefabInstance:
     - target: {fileID: 3086172945556173434, guid: 6eaa5f6c74060bb4ebd7aec3fda85acb, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6815743572590387826, guid: 6eaa5f6c74060bb4ebd7aec3fda85acb, type: 3}
-      propertyPath: m_RenderPostProcessing
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
