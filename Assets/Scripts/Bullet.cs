@@ -31,7 +31,8 @@ public class Bullet : MonoBehaviour
         Bullet otherBullet = other.GetComponent<Bullet>();
         if (otherBullet != null && otherBullet.owner != owner)
         {
-            AudioSource.PlayClipAtPoint(bulletCrashClip, transform.position);
+            // AudioSource.PlayClipAtPoint(bulletCrashClip, transform.position);
+            SoundManager.Instance.PlaySoundAt(bulletCrashClip, transform.position);
             Destroy(otherBullet.gameObject);
             Destroy(gameObject);
             return;

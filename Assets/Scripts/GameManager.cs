@@ -3,7 +3,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
-
+    public GameObject PauseMenuUI;
     private bool isPaused = false;
 
     private void Awake()
@@ -44,14 +44,14 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 0f;
         AudioListener.pause = true; 
-        // show pause UI here
+        PauseMenuUI.SetActive(true);
     }
 
     public void ResumeGame()
     {
         Time.timeScale = 1f;
         AudioListener.pause = false;
-        // hide pause UI here
+        PauseMenuUI.SetActive(false);
     }
 
     public bool IsPaused()

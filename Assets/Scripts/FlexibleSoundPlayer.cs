@@ -35,6 +35,7 @@ public class FlexibleSoundPlayer : MonoBehaviour
             clipToPlay = clips[Random.Range(0, clips.Length)];
         }
         
-        AudioSource.PlayClipAtPoint(clipToPlay, transform.position);
+        // AudioSource.PlayClipAtPoint(clipToPlay, transform.position);
+        SoundManager.Instance.PlaySoundAt(clipToPlay, transform.position);
     }
 }

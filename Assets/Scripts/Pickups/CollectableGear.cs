@@ -18,7 +18,8 @@ public class CollectableGear : MonoBehaviour
         triggered = true;
 
         PowerUpManager.Instance.GiveLife(player, lifeAmount);
-        AudioSource.PlayClipAtPoint(audioClip, transform.position);
+        // AudioSource.PlayClipAtPoint(audioClip, transform.position);
+        SoundManager.Instance.PlaySoundAt(audioClip, transform.position);
         Destroy(gameObject);
     }
 }
