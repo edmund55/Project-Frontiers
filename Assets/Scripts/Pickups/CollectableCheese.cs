@@ -15,7 +15,8 @@ public class CollectableCheese : MonoBehaviour
         triggered = true;
 
         PowerUpManager.Instance.ActivateShield(player);
-        AudioSource.PlayClipAtPoint(audioClip, transform.position);
+        // AudioSource.PlayClipAtPoint(audioClip, transform.position);
+        SoundManager.Instance.PlaySoundAt(audioClip, transform.position);
         Destroy(gameObject);
     }
 }

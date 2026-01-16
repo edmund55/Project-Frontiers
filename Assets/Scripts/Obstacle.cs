@@ -23,6 +23,7 @@ public class Obstacle : MonoBehaviour
 
     public void PlayBulletCrashSound()
     {
-        AudioSource.PlayClipAtPoint(bulletCrashSound, transform.position);
+        // AudioSource.PlayClipAtPoint(bulletCrashSound, transform.position);
+        SoundManager.Instance.PlaySoundAt(bulletCrashSound, transform.position);
     }
 }
