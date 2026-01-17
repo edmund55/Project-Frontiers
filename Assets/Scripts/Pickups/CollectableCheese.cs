@@ -3,6 +3,7 @@ using UnityEngine;
 public class CollectableCheese : MonoBehaviour
 {
     public AudioClip audioClip;
+    public GameObject triggerEffect;
 
     private bool triggered = false;
     private void OnTriggerEnter(Collider other)
@@ -17,6 +18,7 @@ public class CollectableCheese : MonoBehaviour
         PowerUpManager.Instance.ActivateShield(player);
         // AudioSource.PlayClipAtPoint(audioClip, transform.position);
         SoundManager.Instance.PlaySoundAt(audioClip, transform.position);
+        Instantiate(triggerEffect, player.transform);
         Destroy(gameObject);
     }
 }

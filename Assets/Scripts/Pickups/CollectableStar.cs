@@ -10,6 +10,9 @@ public class CollectableStar : MonoBehaviour
     [SerializeField] private float speedIncrease = 5f;
     [SerializeField] private float maxSpeed = 30f;
 
+    [Header("Visuals")]
+    [SerializeField] private GameObject triggerEffect;
+
     private FlexibleSoundPlayer soundPlayer;
     private bool triggered = false;
 
@@ -28,6 +31,7 @@ public class CollectableStar : MonoBehaviour
         triggered = true;
 
         soundPlayer.Play();
+        Instantiate(triggerEffect, transform.position, Quaternion.identity);
 
         int previousScore = UIManager.Instance.GetScore(); // Get score before adding
 
