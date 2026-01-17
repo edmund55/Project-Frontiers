@@ -131,6 +131,10 @@ MonoBehaviour:
   lifeTime: 5
   owner: 0
   bulletCrashClip: {fileID: 8300000, guid: bc59ebe71ac8a38479b8f727c5eb1551, type: 3}
+  enemyExplosionEffect: {fileID: 5112403345868107898, guid: 6f34ef0d986e9db4199cf75805f79753, type: 3}
+  playerExplosionEffect: {fileID: 4021103657954561961, guid: 5c755f9bc5253ea418e919994537dcc7, type: 3}
+  bulletExplosionEffect: {fileID: 1429954232896169633, guid: 83036083a4ebcd34f98131bd3cf6f4d2, type: 3}
+  obstacleExplosionEffect: {fileID: 1429954232896169633, guid: 83036083a4ebcd34f98131bd3cf6f4d2, type: 3}
 --- !u!54 &5793042696653235860
 Rigidbody:
   m_ObjectHideFlags: 0

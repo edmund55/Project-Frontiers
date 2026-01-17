@@ -3,6 +3,7 @@ using UnityEngine;
 public class CollectableLightning : MonoBehaviour
 {
     public AudioClip audioClip;
+    public GameObject triggerEffect;
 
     private bool triggered = false;
     private void OnTriggerEnter(Collider other)
@@ -14,9 +15,10 @@ public class CollectableLightning : MonoBehaviour
 
         triggered = true;
 
-        PowerUpManager.Instance.ActivateDoubleScore();
+        PowerUpManager.Instance.ActivateDoubleScore(player);
         // AudioSource.PlayClipAtPoint(audioClip, transform.position);
         SoundManager.Instance.PlaySoundAt(audioClip, transform.position);
+        Instantiate(triggerEffect, player.transform);
         Destroy(gameObject);
     }
 }

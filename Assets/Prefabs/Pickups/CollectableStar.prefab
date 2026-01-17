@@ -199,3 +199,4 @@ MonoBehaviour:
   scoreThreshold: 30
   speedIncrease: 2
   maxSpeed: 20
+  triggerEffect: {fileID: 332914510875196904, guid: e9b001d31e7011e4a8370f4ca57afb9f, type: 3}
