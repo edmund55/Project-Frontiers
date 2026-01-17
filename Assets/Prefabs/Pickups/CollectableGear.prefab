@@ -69,7 +69,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 8068d78abccab0d448c06bfb595ee640, type: 2}
+  - {fileID: 2100000, guid: e83b1e553c8e4e849b4c712b2d7457bc, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -127,6 +127,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CollectableGear
   audioClip: {fileID: 8300000, guid: b5ccd9cf0c971fa4aa2a81b77cd4bdae, type: 3}
+  triggerEffect: {fileID: 7515064084099313373, guid: 1ac6d168404e74f44b851899170078aa, type: 3}
   lifeAmount: 1
 --- !u!114 &5886315936574173949
 MonoBehaviour:
@@ -141,6 +142,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Rotator
   rotationSpeed: {x: 0, y: 0, z: 50}
+  rotationSpace: 1
 --- !u!1 &7681058192766551689
 GameObject:
   m_ObjectHideFlags: 0

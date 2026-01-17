@@ -36,6 +36,10 @@ public class Player : MonoBehaviour
 
     [Header("Visuals")]
     private MeshRenderer[] playerRenderers; // player mesh; visual during invicibility
+    public GameObject playerDamageEffect;
+    public GameObject playerExplosionEffect;
+    public GameObject playerSparkEffect;
+    public GameObject playerSmokeEffect;
 
     private int currentHealth;
     private float currentBattery;
@@ -139,12 +143,17 @@ public class Player : MonoBehaviour
         if (damageClip != null)
             audioSource.PlayOneShot(damageClip);
 
+        Instantiate(playerDamageEffect, transform);
         currentHealth -= damage;
         UIManager.Instance.SetHealth(currentHealth);
 
         if (currentHealth <= 0)
         {
             DisableControl();
+            Instantiate(playerExplosionEffect, transform);
+            Instantiate(playerSparkEffect, transform.position, Quaternion.identity);
+            Instantiate(playerSmokeEffect, transform.position, Quaternion.identity);
+
             return true;
         }
 
@@ -236,6 +245,11 @@ public class Player : MonoBehaviour
         {
             if (renderer != null) renderer.enabled = state;
         }
+    }
+    void SpawnEffect(GameObject prefab)
+    {
+        GameObject newEffect = Instantiate(prefab, transform);
+        //newEffect.transform.localPosition = Vector3.zero;
     }
 
     // 

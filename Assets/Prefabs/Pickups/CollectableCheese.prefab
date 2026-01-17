@@ -150,6 +150,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CollectableCheese
   audioClip: {fileID: 8300000, guid: e931f73df7d3e03459dfb85fc3a48a1a, type: 3}
+  triggerEffect: {fileID: 2708598583397607911, guid: 6398d43fe79ea0140913dc5530c646af, type: 3}
 --- !u!4 &624596863154136880 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5991090011515187033, guid: d48d9886d96797d4b8d65083c7670a9c, type: 3}

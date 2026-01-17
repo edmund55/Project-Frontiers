@@ -15,6 +15,10 @@ public class Bullet : MonoBehaviour
     public BulletOwner owner;
     public AudioClip bulletCrashClip;
 
+    public GameObject enemyExplosionEffect;
+    public GameObject bulletExplosionEffect;
+    public GameObject obstacleExplosionEffect;
+
     void Start()
     {
         Destroy(gameObject, lifeTime);
@@ -33,6 +37,7 @@ public class Bullet : MonoBehaviour
         {
             // AudioSource.PlayClipAtPoint(bulletCrashClip, transform.position);
             SoundManager.Instance.PlaySoundAt(bulletCrashClip, transform.position);
+            Instantiate(bulletExplosionEffect, transform.position, Quaternion.identity);
             Destroy(otherBullet.gameObject);
             Destroy(gameObject);
             return;
@@ -44,11 +49,13 @@ public class Bullet : MonoBehaviour
             if (other.CompareTag("Enemy"))
             {
                 other.GetComponent<EnemyShooter>().Die();
+                Instantiate(enemyExplosionEffect, transform.position, Quaternion.identity);
                 Destroy(gameObject);
             }
             else if (other.CompareTag("Obstacle"))
             {
                 other.GetComponent<Obstacle>().PlayBulletCrashSound();
+                Instantiate(obstacleExplosionEffect, transform.position, Quaternion.identity);
                 Destroy(gameObject);
             }
         }
