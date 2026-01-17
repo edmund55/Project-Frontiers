@@ -156,6 +156,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CollectableBattery
   audioClip: {fileID: 8300000, guid: 0346a4e5a5682a247affa8a115f359a4, type: 3}
+  triggerEffect: {fileID: 8771972552311404799, guid: bbf9e36a48d6c5648a13889afab076fd, type: 3}
   RechargeAmount: 30
 --- !u!4 &4509765866404876131 stripped
 Transform:

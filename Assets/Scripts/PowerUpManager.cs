@@ -9,6 +9,12 @@ public class PowerUpManager : MonoBehaviour
     [SerializeField] private float doubleScoreDuration = 5f;
     [SerializeField] private float shieldDuration = 5f;
 
+    [Header("Visuals")]
+    [SerializeField] private GameObject cheeseEffect;
+    private GameObject currentCheeseEffect;
+    [SerializeField] private GameObject lightningEffect;
+    private GameObject currentLightningEffect;
+
     private bool doubleScoreActive;
     private bool shieldActive;
 
@@ -25,6 +31,12 @@ public class PowerUpManager : MonoBehaviour
         Instance = this;
     }
 
+    private void Start()
+    {
+        Player player = FindFirstObjectByType<Player>();
+        if (player == null) return;
+    }
+
     // Life
     public void GiveLife(Player player, int amount)
     {
@@ -32,18 +44,24 @@ public class PowerUpManager : MonoBehaviour
     }
 
     // Double Score
-    public void ActivateDoubleScore()
+    public void ActivateDoubleScore(Player player)
     {
         if (doubleScoreRoutine != null)
             StopCoroutine(doubleScoreRoutine);
 
-        doubleScoreRoutine = StartCoroutine(DoubleScoreCoroutine());
+        doubleScoreRoutine = StartCoroutine(DoubleScoreCoroutine(player));
     }
 
-    private IEnumerator DoubleScoreCoroutine()
+    private IEnumerator DoubleScoreCoroutine(Player player)
     {
         doubleScoreActive = true;
+
+        currentLightningEffect = Instantiate(lightningEffect, player.transform);
+
         yield return new WaitForSeconds(doubleScoreDuration);
+
+        Destroy(currentLightningEffect);
+
         doubleScoreActive = false;
     }
 
@@ -66,7 +84,11 @@ public class PowerUpManager : MonoBehaviour
         shieldActive = true;
         player.SetShield(true);
 
+        currentCheeseEffect = Instantiate(cheeseEffect, player.transform);
+
         yield return new WaitForSeconds(shieldDuration);
+
+        Destroy(currentCheeseEffect);
 
         shieldActive = false;
         player.SetShield(false);
