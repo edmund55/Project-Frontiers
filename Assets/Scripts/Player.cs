@@ -40,6 +40,7 @@ public class Player : MonoBehaviour
     public GameObject playerExplosionEffect;
     public GameObject playerSparkEffect;
     public GameObject playerSmokeEffect;
+    public GameObject PanelDeath;
 
     private int currentHealth;
     private float currentBattery;
@@ -150,6 +151,7 @@ public class Player : MonoBehaviour
         if (currentHealth <= 0)
         {
             DisableControl();
+            PanelDeath.SetActive(true);
             Instantiate(playerExplosionEffect, transform);
             Instantiate(playerSparkEffect, transform.position, Quaternion.identity);
             Instantiate(playerSmokeEffect, transform.position, Quaternion.identity);
