@@ -9,16 +9,36 @@ public class SceneLoader : MonoBehaviour
         SceneManager.LoadScene("MainScene");
     }
 
-    // How To Play
-    public void OpenHowToPlay()
+    // How To Play (Controls)
+    public void OpenControlsScene()
     {
-        SceneManager.LoadScene("HowtoPlayScene");
+        SceneManager.LoadScene("ControlsScene1");
+    }
+
+    // Settings
+    public void OpenSettingsScene()
+    {
+        SceneManager.LoadScene("SettingsScene");
     }
 
     // Back to Main Menu from How To Play
     public void BackToMainMenu()
     {
         SceneManager.LoadScene("MenuScene");
+    }
+
+    // Next Scene (ButtonNext)
+    public void LoadNextScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1
+        );
+    }
+
+    // Previous Scene (ButtonBack)
+    public void LoadPreviousScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1
+        );
     }
 
     // Quit
