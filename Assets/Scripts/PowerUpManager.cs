@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class PowerUpManager : MonoBehaviour
 {
@@ -14,6 +15,10 @@ public class PowerUpManager : MonoBehaviour
     private GameObject currentCheeseEffect;
     [SerializeField] private GameObject lightningEffect;
     private GameObject currentLightningEffect;
+
+    [Header("UI")]
+    [SerializeField] private Slider shieldSlider;
+    [SerializeField] private Slider doubleScoreSlider;
 
     private bool doubleScoreActive;
     private bool shieldActive;
@@ -35,6 +40,9 @@ public class PowerUpManager : MonoBehaviour
     {
         Player player = FindFirstObjectByType<Player>();
         if (player == null) return;
+
+        shieldSlider.gameObject.SetActive(false);
+        doubleScoreSlider.gameObject.SetActive(false);
     }
 
     // Life
@@ -58,9 +66,18 @@ public class PowerUpManager : MonoBehaviour
 
         currentLightningEffect = Instantiate(lightningEffect, player.transform);
 
-        yield return new WaitForSeconds(doubleScoreDuration);
+        float timeleft = doubleScoreDuration;
+        doubleScoreSlider.gameObject.SetActive(true);
+
+        while (timeleft > 0)
+        {
+            timeleft -= Time.deltaTime;
+            doubleScoreSlider.value = timeleft / doubleScoreDuration;
+            yield return null;
+        }
 
         Destroy(currentLightningEffect);
+        doubleScoreSlider.gameObject.SetActive(false);
 
         doubleScoreActive = false;
     }
@@ -86,9 +103,18 @@ public class PowerUpManager : MonoBehaviour
 
         currentCheeseEffect = Instantiate(cheeseEffect, player.transform);
 
-        yield return new WaitForSeconds(shieldDuration);
+        float timeLeft = shieldDuration;
+        shieldSlider.gameObject.SetActive(true);
+
+        while (timeLeft > 0)
+        {
+            timeLeft -= Time.deltaTime;
+            shieldSlider.value = timeLeft / shieldDuration;
+            yield return null;
+        }
 
         Destroy(currentCheeseEffect);
+        shieldSlider.gameObject.SetActive(false);
 
         shieldActive = false;
         player.SetShield(false);
