@@ -45,6 +45,7 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 0f;
         AudioListener.pause = true; 
         PauseMenuUI.SetActive(true);
+        PauseMenuUI.transform.SetAsLastSibling();
     }
 
     public void ResumeGame()

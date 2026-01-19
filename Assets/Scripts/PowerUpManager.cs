@@ -55,7 +55,14 @@ public class PowerUpManager : MonoBehaviour
     public void ActivateDoubleScore(Player player)
     {
         if (doubleScoreRoutine != null)
+        {
             StopCoroutine(doubleScoreRoutine);
+
+            if (currentLightningEffect != null)
+            {
+                Destroy(currentLightningEffect);
+            }
+        }
 
         doubleScoreRoutine = StartCoroutine(DoubleScoreCoroutine(player));
     }
@@ -77,9 +84,11 @@ public class PowerUpManager : MonoBehaviour
         }
 
         Destroy(currentLightningEffect);
+
         doubleScoreSlider.gameObject.SetActive(false);
 
         doubleScoreActive = false;
+        doubleScoreRoutine = null;
     }
 
     public int ModifyScore(int baseScore)
@@ -91,7 +100,14 @@ public class PowerUpManager : MonoBehaviour
     public void ActivateShield(Player player)
     {
         if (shieldRoutine != null)
+        {
             StopCoroutine(shieldRoutine);
+
+            if (currentCheeseEffect != null)
+            {
+                Destroy(currentCheeseEffect);
+            }
+        }
 
         shieldRoutine = StartCoroutine(ShieldCoroutine(player));
     }
@@ -114,9 +130,11 @@ public class PowerUpManager : MonoBehaviour
         }
 
         Destroy(currentCheeseEffect);
+
         shieldSlider.gameObject.SetActive(false);
 
         shieldActive = false;
+        shieldRoutine = null;
         player.SetShield(false);
     }
 

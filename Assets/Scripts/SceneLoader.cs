@@ -27,6 +27,12 @@ public class SceneLoader : MonoBehaviour
         SceneManager.LoadScene("MenuScene");
     }
 
+    // Lore Scene
+    public void OpenLoreScene()
+    {
+        SceneManager.LoadScene("LoreScene");
+    }
+
     // Next Scene (ButtonNext)
     public void LoadNextScene()
     {

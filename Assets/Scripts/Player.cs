@@ -150,11 +150,7 @@ public class Player : MonoBehaviour
 
         if (currentHealth <= 0)
         {
-            DisableControl();
-            PanelDeath.SetActive(true);
-            Instantiate(playerExplosionEffect, transform);
-            Instantiate(playerSparkEffect, transform.position, Quaternion.identity);
-            Instantiate(playerSmokeEffect, transform.position, Quaternion.identity);
+            Die();
 
             return true;
         }
@@ -184,7 +180,7 @@ public class Player : MonoBehaviour
 
         if (currentBattery <= 0)
         {
-            DisableControl();
+            Die();
         }
     }
     public void RechargeBattery(float amount)
@@ -248,11 +244,6 @@ public class Player : MonoBehaviour
             if (renderer != null) renderer.enabled = state;
         }
     }
-    void SpawnEffect(GameObject prefab)
-    {
-        GameObject newEffect = Instantiate(prefab, transform);
-        //newEffect.transform.localPosition = Vector3.zero;
-    }
 
     // 
     public void DisableControl()
@@ -261,6 +252,15 @@ public class Player : MonoBehaviour
 
         transform.Translate(Vector3.zero);
         audioSource.PlayOneShot(deathClip);
+    }
+
+    public void Die()
+    {
+        DisableControl();
+        PanelDeath.SetActive(true);
+        Instantiate(playerExplosionEffect, transform);
+        Instantiate(playerSparkEffect, transform.position, Quaternion.identity);
+        Instantiate(playerSmokeEffect, transform.position, Quaternion.identity);
     }
 
 }
