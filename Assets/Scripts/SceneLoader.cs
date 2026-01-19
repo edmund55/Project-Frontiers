@@ -3,6 +3,10 @@ using UnityEngine.SceneManagement;
 
 public class SceneLoader : MonoBehaviour
 {
+    private void Awake()
+    {
+        AudioListener.pause = false;
+    }
     // Start
     public void StartGame()
     {

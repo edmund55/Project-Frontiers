@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
         }
 
         Instance = this;
-        Time.timeScale = 1f; 
+        Time.timeScale = 1f;
     }
 
     private void Update()
