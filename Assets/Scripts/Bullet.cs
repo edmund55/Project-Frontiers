@@ -26,13 +26,13 @@ public class Bullet : MonoBehaviour
 
     void Update()
     {
-        transform.Translate(Vector3.forward * speed * Time.deltaTime);
+        transform.Translate(Vector3.forward * speed * Time.deltaTime, Space.Self);
     }
 
     private void OnTriggerEnter(Collider other)
     {
         // Bullet vs Bullet
-        Bullet otherBullet = other.GetComponent<Bullet>();
+        Bullet otherBullet = other.GetComponentInParent<Bullet>();
         if (otherBullet != null && otherBullet.owner != owner)
         {
             // AudioSource.PlayClipAtPoint(bulletCrashClip, transform.position);

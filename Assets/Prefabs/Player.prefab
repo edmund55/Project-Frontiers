@@ -65,7 +65,7 @@ MonoBehaviour:
   maxBattery: 100
   batteryDecreasePerSecond: 5
   invincibilityDuration: 2
-  bulletPrefab: {fileID: 7859885041541673104, guid: a93304ee40d0a964eab26307efe273ca, type: 3}
+  bulletPrefab: {fileID: 1850159144930192748, guid: c2966ce5184f4154392c06bb5cc89931, type: 3}
   firePoint: {fileID: 596372394606976688}
   fireCooldown: 0.3
   shootClip: {fileID: 8300000, guid: 92fecfd13a5890d40b98e151eb81b875, type: 3}
@@ -73,6 +73,7 @@ MonoBehaviour:
   playerExplosionEffect: {fileID: 725748389856807714, guid: 4bda94453d2ca7444a0fff05b2d425f5, type: 3}
   playerSparkEffect: {fileID: 763799897560185588, guid: 798157bad7358b04499c9d71cd3c0d9b, type: 3}
   playerSmokeEffect: {fileID: 8764043878647920493, guid: c4ed38c72957f2241ad144a1614956d9, type: 3}
+  PanelDeath: {fileID: 0}
 --- !u!54 &4121114501725861979
 Rigidbody:
   m_ObjectHideFlags: 0
